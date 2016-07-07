@@ -25,9 +25,21 @@ If you run on the HiveServer2's server, you need to set the `hive-principal`,  `
 
 If you run it from an external server, add the `krb-conf` and `server` parameters.
 
-So it'll look like :
+So it would look like :
 
 ```bash
+# On HS2
 java -jar /path/to/HiveJDBCWriter-1.0.jar \
-  <parameters>
+  --hive-principal "hive/<hiveserver2_host>@REALM"
+  --principal "my_app_princ@REALM"
+  --keytab "/path/to/my_app_princ.keytab"
+  
+# From an external serv
+java -jar /path/to/HiveJDBCWriter-1.0.jar \
+  --hive-principal "hive/<hiveserver2_host>@REALM"
+  --principal "my_app_princ@REALM"
+  --keytab "/path/to/my_app_princ.keytab"
+  --krb-conf "/path/to/krb5.conf"
+  --server "<hiveserver2_host>"
+  --port 10000
 ```
